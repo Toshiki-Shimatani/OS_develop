@@ -41,6 +41,31 @@ BS_FilSysType   DB      "FAT12  "       ;FileSystemType
 
 ;/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 ;
+; DisplayMessage
+; display ASCIIZ string
+;
+;/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+DisplayMessage:
+        PUSH    AX
+        PUSH    BX
+StartDispMsg:
+        LODSB
+        OR      AL, AL
+        JZ      .DONE
+        MOV     AH, 0x0E
+        MOV     BH, 0x00
+        MOV     BL, 0x07
+        INT     0x10
+        JMP     StartDispMsg
+.DONE:
+        POP     BX
+        POP     AX
+        RET
+
+ImageName       DB "Bood-bye Small World",  0x00
+
+;/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+;
 ; BOOT
 ;
 ;/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -57,6 +82,22 @@ BOOT:
         XOR     BX, BX
         XOR     CX, CX
         XOR     DX, DX
+
+; Initialize Stack Segment and Stack Pointer
+        MOV     SS, AX
+        MOV     SP, 0xFFFC
+
+        MOV     AH, 0x00
+        MOV     AL, 0x12
+        INT     0x10
+        MOV     AH, 0x0E
+        MOV     AL, 0x41
+        MOV     BH, 0x00
+        MOV     BL, 0x19
+        INT     0x10
+        MOV     SI, ImageName
+        CALL    DisplayMessage
+        HLT
 
 TIMES 510 - ($ - $$) DB 0
 
