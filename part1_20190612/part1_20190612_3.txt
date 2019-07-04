@@ -1,8 +1,8 @@
 // -----------------------------------------------------------------
-//  Author  : Shimatani Toshiki <shimatani@swlab.cs.okayama-u.ac.jp>
-//  Make_Date   : 2019/06/12 21:00:44
-//  Update_Date : 2019/06/28 21:52:42
-//  Filename: part1_20190612_3.txt
+//  Author      : Shimatani Toshiki <shimatani@swlab.cs.okayama-u.ac.jp>
+//  Make_Date   : 2019/07/04 16:13:45
+//  Update_Date : 2019/07/04 16:13:45
+//  Filename    : part1_20190612_3.txt
 // -----------------------------------------------------------------
 
 "part1_20190612_2.txt"にて，レジスタやセグメントに関して説明をした．
